@@ -5,8 +5,8 @@ class Note {
   String id =
       UniqueKey().hashCode.toUnsigned(20).toRadixString(16).padLeft(5, '0');
 
-  final String title;
-  final String desc;
+  String title;
+  String desc;
   bool isDeleted = false;
 
   Note(this.title, this.desc);

@@ -1,14 +1,15 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_app_note/ui/views/note/note_repository.dart';
 import 'package:stacked/stacked.dart';
 
 import 'package:flutter_app_note/ui/views/note/note_model.dart';
-// import 'note_model.dart';
+import 'note_model.dart';
 
 /// Trạng thái của view
 enum NoteViewState { listView, itemView, insertView, updateView }
 
 class NoteViewModel extends BaseViewModel {
-  final title = 'Note View Model';
+  final title = 'Danh sách Note';
 
   /// Danh sách các bản ghi được load bất đồng bộ bên trong view model,
   /// khi load thành công thì thông báo đến view để cập nhật trạng thái
@@ -36,6 +37,11 @@ class NoteViewModel extends BaseViewModel {
   /// Cần có một getter để lấy ra trạng thái view cục bộ cho view
   NoteViewState get state => _state;
 
+  Note editingItem;
+
+  var editingControllerTitle = TextEditingController();
+  var editingControllerDesc = TextEditingController();
+
   ///
   var repo = NoteRepository();
 
@@ -51,11 +57,41 @@ class NoteViewModel extends BaseViewModel {
   }
 
   void addItem() {
-    var title = DateTime.now().millisecondsSinceEpoch.toString();
-    var desc = DateTime.now().toLocal().toString();
+    var timestamp = DateTime.now();
+    var title = timestamp.millisecondsSinceEpoch.toString();
+    var desc = timestamp.toLocal().toString();
+
     var item = Note(title, desc);
     repo.insert(item).then((value) {
       reloadItems();
     });
+  }
+
+  void updateItem() {
+    editingControllerTitle.text = editingItem.title;
+    editingControllerDesc.text = editingItem.desc;
+    state = NoteViewState.updateView;
+  }
+
+  void saveItem() {
+    Note note =
+        new Note(editingControllerTitle.text, editingControllerDesc.text);
+    note.id = editingItem.id;
+    repo.update(note).then((value) {
+      int index = _items.indexWhere((element) => element.id == note.id);
+      _items[index].title = note.title;
+      _items[index].desc = note.desc;
+      state = NoteViewState.listView;
+      editingItem = null;
+      notifyListeners();
+    });
+  }
+
+  void deleteItem() {
+    repo.delete(editingItem);
+    _items.removeWhere((element) => element.id == editingItem.id);
+    state = NoteViewState.listView;
+    editingItem = null;
+    notifyListeners();
   }
 }
