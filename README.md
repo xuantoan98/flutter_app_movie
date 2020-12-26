@@ -20,6 +20,19 @@ Với kho lưu trữ được tạo trong tài khoản GitHub của bạn, hãy 
 
 Hoặc sao chép nó về bằng công cụ `Visual Studio Code` bằng cách đi đến menu *`View > Command Palette...`* rồi nhập `Git: Clone` sau đó cung cấp URL của kho lưu trữ hoặc chọn nguồn kho lưu trữ `https://github.com/<YOUR_ACCOUNT_NAME>/mynote.git`.
 
+# List images screens
+## Screen Login
+![alt text](https://raw.githubusercontent.com/xuantoan98/flutter_app_movie/appNoteV1/assets/screen_login.PNG "screen detail")
+
+## Screen Home
+![alt text](https://raw.githubusercontent.com/xuantoan98/flutter_app_movie/appNoteV1/assets/screen_home.PNG "screen detail")
+
+## Screen Detail
+![alt text](https://raw.githubusercontent.com/xuantoan98/flutter_app_movie/appNoteV1/assets/screen_detail.PNG "screen detail")
+
+## Screen Update
+![alt text](https://raw.githubusercontent.com/xuantoan98/flutter_app_movie/appNoteV1/assets/screen_update.PNG "screen detail")
+
 # Source Code Module Note
 
 ### main.dart
