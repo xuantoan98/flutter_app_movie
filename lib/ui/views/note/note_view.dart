@@ -13,7 +13,6 @@ class NoteView extends StatelessWidget {
       onModelReady: (model) => model.init(),
       builder: (context, model, child) => Scaffold(
         appBar: AppBar(title: Text(model.title)),
-
         body: Stack(
           children: [
             model.state == NoteViewState.listView
@@ -38,16 +37,6 @@ class NoteView extends StatelessWidget {
                         : SizedBox(),
           ],
         ),
-        // body: ListView.builder(
-        //   itemCount: model.items.length,
-        //   itemBuilder: (BuildContext context, int index) {
-        //     Note item = model.items[index];
-        //     return ListTile(
-        //       title: Text(item.title),
-        //       subtitle: Text(item.desc),
-        //     );
-        //   },
-        // ),
         floatingActionButton: model.state == NoteViewState.listView
             ? FloatingActionButton(
                 child: Icon(Icons.add),
